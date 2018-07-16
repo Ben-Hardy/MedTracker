@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">MedTracker</string>
+    <string name="action_settings">Settings</string>
+    <string name="add_medication">Add Medication</string>
+    <string name="med_name_query">What is the name of the medicine?</string>
+    <string name="med_freq_query">How many times a day do you have to take the medication? Put zero if it is as needed.</string>
+    <string name="doc_notes_query">Any notes from the doctor on the bottle?</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="add_med_button_text">Add Medication!</string>
+    <string name="add_medication_activity_name">AddMedicationActivity</string>
+    <string name="weekly_req_query">What Days of the week are you to take this medication? Enter no
+    days if it is as needed.</string>
+    <string name="title_activity_view_medication">ViewMedicationActivity</string>
+    <string name="go_back">Go Back</string>
+    <string name="med_name_label">Medication Name:\ </string>
+    <string name="daily_freq_label">You are to take this medication\ </string>
+    <string name="daily_freq_end_label">\ time(s) per day.</string>
+    <string name="no_doc_notes_label">No notes for this entry</string>
+    <string name="doc_notes_label">Doctor\'s notes:\n</string>
+</resources>
