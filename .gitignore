@@ -59,3 +59,7 @@ local.properties
 .idea/workspace.xml
 
 local.properties
+.gradle/4.4/javaCompile/javaCompile.lock
+.gradle/4.4/fileHashes/fileHashes.bin
+.gradle/4.4/javaCompile/classAnalysis.bin
+local.properties

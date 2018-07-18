@@ -3,13 +3,15 @@ create activities for main screen and adding a medication - DONE
 create viewmodel for medication - DONE/IN PROGRESS
 create an activity for viewing details of a medication on touching it on main screen - IN PROGRESS
 
-
 back end functionality:
     add medication - DONE
     view medication - DONE
     delete medication - DONE
-    modify/update medication - TODO/DONE-ISH
-    add whether or not a medication was taken on a given day (last column in database schema) - TODO
+    modify/update medication - DONE
+    add whether or not a medication was taken on a given day (last column in database schema -NOT THAT) - TODO
+        - create new database for this rather than try and use one column since that's way to clunky - TODO
+        - create add, view, and delete Activities for these log entries, or perhaps incorporate adding
+          into existing views??????? - TODO
 Add notifications to remind to take medications - TODO
     - at time given by user?
 Swipe functionality on main screen for each medication - TODO

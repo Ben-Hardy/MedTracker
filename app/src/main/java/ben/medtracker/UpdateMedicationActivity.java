@@ -19,12 +19,13 @@ import ben.medtracker.data.MedicationEntry;
 
 public class UpdateMedicationActivity extends AppCompatActivity {
 
+    // Variables used for logging and activity transitions
     private static final String TAG = UpdateMedicationActivity.class.getSimpleName();
-
     public static final String EXTRA_MED_ID = "extramedid";
     private static final int DEFAULT_MED_ID = -1;
     private static final String INSTANCE_MED_ID = "instancemedid";
 
+    // UI elements
     TextView medicationNameTextView;
     EditText dailyReqEditText;
     EditText docNotesEditText;
@@ -42,6 +43,7 @@ public class UpdateMedicationActivity extends AppCompatActivity {
 
     Intent intent;
 
+    // member variables that are needed to run the operations on the database
     private MedicationDatabase medDb;
     private int medId;
 
@@ -82,6 +84,10 @@ public class UpdateMedicationActivity extends AppCompatActivity {
         cancelUpdateButton = findViewById(R.id.cancel_update_button);
     }
 
+    /*
+    Populated the UI elements of the Update Activity with the information previously provided by
+    the user
+     */
     public void fillInEditTexts() {
         if (intent != null && intent.hasExtra(EXTRA_MED_ID)) {
             medId = intent.getIntExtra(EXTRA_MED_ID, DEFAULT_MED_ID);
@@ -104,12 +110,40 @@ public class UpdateMedicationActivity extends AppCompatActivity {
                         dailyReqEditText.setText(medicationEntry.getDailyFrequency());
                     }
 
+                    if (medicationEntry.getWeeklyFrequency().equals(getString(R.string.daily))) {
+                        mondayCheckBox.setChecked(true);
+                        tuesdayCheckBox.setChecked(true);
+                        wednesdayCheckBox.setChecked(true);
+                        thursdayCheckBox.setChecked(true);
+                        fridayCheckBox.setChecked(true);
+                        saturdayCheckBox.setChecked(true);
+                        sundayCheckBox.setChecked(true);
+                    } else if (medicationEntry.getWeeklyFrequency().equals(getString(R.string.as_needed))) {
+                        // This is explicitly here and empty so that when we decode the day codes it won't falsely
+                        // check off a day
+                    } else {
+                        String entryWeeklyFreqString = medicationEntry.getWeeklyFrequency();
+
+                        if (entryWeeklyFreqString.contains("M")) mondayCheckBox.setChecked(true);
+                        if (entryWeeklyFreqString.contains("T")) tuesdayCheckBox.setChecked(true);
+                        if (entryWeeklyFreqString.contains("W")) wednesdayCheckBox.setChecked(true);
+                        if (entryWeeklyFreqString.contains("t")) thursdayCheckBox.setChecked(true);
+                        if (entryWeeklyFreqString.contains("F")) fridayCheckBox.setChecked(true);
+                        if (entryWeeklyFreqString.contains("S")) saturdayCheckBox.setChecked(true);
+                        if (entryWeeklyFreqString.contains("s")) sundayCheckBox.setChecked(true);
+                    }
+
                     docNotesEditText.setText(medicationEntry.getDocNotes());
                 }
             });
         }
     }
 
+    /*
+    The Listener for the back button. Simply uses the system back button since that is the simplest
+    way of going back.
+    Returns a listener for the back button
+     */
     public View.OnClickListener onUpdateCancelButtonListener() {
         return new View.OnClickListener() {
             @Override
@@ -119,6 +153,10 @@ public class UpdateMedicationActivity extends AppCompatActivity {
         };
     }
 
+    /*
+    Listener for the Update Medication button. Confirms that the input is valid,
+     then creates the data for a database entry and safely puts it in the database.
+     */
     public View.OnClickListener onUpdateButtonClickedListener() {
         return new View.OnClickListener() {
             @Override
@@ -133,6 +171,7 @@ public class UpdateMedicationActivity extends AppCompatActivity {
                         dailyFreqNum = Integer.parseInt(dailyReqEditText.getText().toString());
                     } catch (Exception e) {}
 
+                    // Verifies the daily frequency amount is a positive integer
                     if (dailyFreqNum < 0) {
                         Toast.makeText(getApplicationContext(), "Daily Frequency must be a positive number!", Toast.LENGTH_LONG).show();
                     } else {
@@ -148,11 +187,12 @@ public class UpdateMedicationActivity extends AppCompatActivity {
                         StringBuilder sb = new StringBuilder();
                         String schedule;
 
+                        // Collects data from the checkboxes and encodes it for the database
                         if (mondayCheckBox.isChecked() && tuesdayCheckBox.isChecked()
                                 && wednesdayCheckBox.isChecked() && thursdayCheckBox.isChecked()
                                 && fridayCheckBox.isChecked() && saturdayCheckBox.isChecked()
                                 && sundayCheckBox.isChecked())
-                            schedule = "Daily";
+                            schedule = getString(R.string.daily);
                         else {
                             if (mondayCheckBox.isChecked()) sb.append("M");
                             if (tuesdayCheckBox.isChecked()) sb.append("T");
@@ -185,6 +225,8 @@ public class UpdateMedicationActivity extends AppCompatActivity {
 
                         });
 
+                        // Explicitly go back to ViewMedicationActivity since simply going back
+                        // can create a navigation loop
                         Intent backToViewActivity = new Intent(UpdateMedicationActivity.this,
                                 ViewMedicationActivity.class);
                         backToViewActivity.putExtra(EXTRA_MED_ID, medId);

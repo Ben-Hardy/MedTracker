@@ -18,12 +18,13 @@ import ben.medtracker.data.MedicationEntry;
 
 public class AddMedicationActivity extends AppCompatActivity {
 
+    // Variables for inter-Activity communication and logging
     private static final int DEFAULT_ID = -1;
     public static final String SPARE_ID = "extra stuff!";
     public static final String INSTANCE_ID = "Instance!";
-
     private static final String TAG = AddMedicationActivity.class.getSimpleName();
 
+    // UI Elements
     EditText medNameEditText;
     EditText dailyFrequencyEditText;
     EditText docNotesEditText;
@@ -50,6 +51,9 @@ public class AddMedicationActivity extends AppCompatActivity {
         medDb = MedicationDatabase.getDatabase(getApplicationContext());
     }
 
+    /*
+    Initializes UI and sets Listeners
+     */
     public void initializeUI() {
         medNameEditText = findViewById(R.id.med_name_et);
         dailyFrequencyEditText = findViewById(R.id.med_daily_req_et);
@@ -69,6 +73,10 @@ public class AddMedicationActivity extends AppCompatActivity {
         goHomeButton.setOnClickListener(onGoHomeButtonClicked());
     }
 
+    /*
+    Listener for adding a medication. Makes sure the TextFields are correctly filled in, and if they
+    are, creates usable data for the database then safely adds it to the database
+     */
     public View.OnClickListener onAddMedicationButtonClicked() {
         return new View.OnClickListener() {
             @Override
@@ -146,6 +154,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         };
     }
 
+    // Explicitly makes the app go back to the MainActivity
     public View.OnClickListener onGoHomeButtonClicked() {
         return new View.OnClickListener() {
             @Override

@@ -31,4 +31,5 @@
     <string name="cancel_update">Cancel Update</string>
     <string name="as_needed">As needed</string>
     <string name="go_home">Go Home</string>
+    <string name="daily">Daily</string>
 </resources>

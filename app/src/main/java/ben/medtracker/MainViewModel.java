@@ -10,6 +10,10 @@ import java.util.List;
 import ben.medtracker.data.MedicationDatabase;
 import ben.medtracker.data.MedicationEntry;
 
+/*
+The ViewModel for our MainActivity. Since we need a list of all medications, we use this to
+access them. Since it is LiveData, we are required to use an observer to safely access this data
+ */
 public class MainViewModel extends AndroidViewModel {
 
     private LiveData<List<MedicationEntry>> medications;

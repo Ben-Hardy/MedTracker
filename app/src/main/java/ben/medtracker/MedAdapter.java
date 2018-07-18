@@ -12,6 +12,9 @@ import java.util.List;
 
 import ben.medtracker.data.MedicationEntry;
 
+/*
+Adapter class for RecyclerViews since we will be using those to show the medications in the database
+ */
 public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
 
     private List<MedicationEntry> mMedEntries;
@@ -28,12 +31,16 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
     }
 
 
+    /*
+    Inflates the view that the adapter's data will occupy and returns it so the Activity can use it.
+     */
     @NonNull
     @Override
     public MedAdapter.MedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.med_rv_layout, parent, false);
         return new MedViewHolder(view);
     }
+
 
     @Override
     public void onBindViewHolder(@NonNull MedAdapter.MedViewHolder holder, int position) {
@@ -49,6 +56,9 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
         else return mMedEntries.size();
     }
 
+    /*
+    Returns list of medication entries. Used primarily to populate the recyclerview
+     */
     public List<MedicationEntry> getMedEntries() {
         return mMedEntries;
     }
@@ -58,7 +68,10 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
         notifyDataSetChanged();
     }
 
-
+    /*
+    The ViewHolder for the Adapter. Creates a ViewHolder for each medication and sets an
+    OnClickListener for each entry.
+     */
     class MedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView medNameView;
@@ -76,6 +89,10 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
         }
     }
 
+    /*
+    This function is used to simplify getting medications from the adapter since the id will not
+    necessarily match the index of the adapter the medication is stored in
+     */
     public MedicationEntry getEntryById (int id) {
         for (MedicationEntry entry : mMedEntries) {
             if (entry.getId() == id)

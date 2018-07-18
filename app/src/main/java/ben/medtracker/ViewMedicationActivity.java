@@ -33,6 +33,7 @@ public class ViewMedicationActivity extends AppCompatActivity {
 
     private static final String TAG = ViewMedicationActivity.class.getSimpleName();
 
+    // UI elements
     Button updateMedicationButton;
     Button deleteMedicationButton;
     Button goBackButton;
@@ -42,9 +43,15 @@ public class ViewMedicationActivity extends AppCompatActivity {
     TextView weeklyFreqTextView;
     TextView docNotesTextView;
 
+    // Member variables
     private int medId;
     private MedicationDatabase medDb;
 
+    /*
+    This medication entry is created to simplify deletion should the user decide to do so.
+    It requires a tiny bit more memory but saves us from having to do a second database access
+    just to get one item that will be getting deleted.
+    */
     private MedicationEntry entryToDelete;
 
     @Override
@@ -56,11 +63,13 @@ public class ViewMedicationActivity extends AppCompatActivity {
             medId = savedInstanceState.getInt(INSTANCE_MED_ID);
 
         medDb = MedicationDatabase.getDatabase(getApplicationContext());
-        //Log.d(TAG, "Successfully retrieved DB");
 
         initializeUI();
     }
 
+    /*
+    Used for what it says, initializing the UI.
+     */
     public void initializeUI() {
         medNameTextView = findViewById(R.id.view_med_name_tv);
         dailyFreqTextView = findViewById(R.id.view_daily_freq_tv);
@@ -72,11 +81,14 @@ public class ViewMedicationActivity extends AppCompatActivity {
         if (intent != null && intent.hasExtra(EXTRA_MED_ID)) {
             medId = intent.getIntExtra(EXTRA_MED_ID, DEFAULT_MED_ID);
 
+            /*
+            Since we are using LiveData with this app, we are required to use an observer to\
+            fetch the data for the MedicationEntry being viewed. We also will use this access to
+            store the entry in case we want to delete it rather than using two LiveData accesses.
+            */
             AddMedicationViewModelFactory factory = new AddMedicationViewModelFactory(medDb, medId);
-
             final AddMedicationViewModel medicationViewModel = ViewModelProviders.of(this, factory)
                     .get(AddMedicationViewModel.class);
-
             medicationViewModel.getMedication().observe(this, new Observer<MedicationEntry>() {
                 @Override
                 public void onChanged(@Nullable MedicationEntry medicationEntry) {
@@ -100,6 +112,9 @@ public class ViewMedicationActivity extends AppCompatActivity {
         goBackButton.setOnClickListener(onGoBackButtonClickedListener());
     }
 
+    /*
+    The Listener for the UpdateMedication Button. Moves the user to the UpdateMedicationActivity.
+     */
     public View.OnClickListener onUpdateMedicationButtonClickedListener() {
         return new View.OnClickListener() {
             @Override
@@ -111,6 +126,10 @@ public class ViewMedicationActivity extends AppCompatActivity {
         };
     }
 
+    /*
+    The Listener for the Delete Button. Confirms with the user that they wish to delete the entry
+    and then safely deletes it using a separate thread.
+     */
     public View.OnClickListener onDeleteButtonClickedListener() {
         return new View.OnClickListener() {
             @Override
@@ -144,7 +163,10 @@ public class ViewMedicationActivity extends AppCompatActivity {
     }
 
 
-
+    /*
+    The Listener for the Go Back Button. Explicitly goes back to the MainActivity so as to avoid
+    awkward situations using the system back button stack.
+     */
     public View.OnClickListener onGoBackButtonClickedListener() {
         return new View.OnClickListener() {
             @Override

@@ -24,8 +24,6 @@ public class MainActivity extends AppCompatActivity implements MedAdapter.ItemCl
     // Logging tag
     private static final String TAG = MainActivity.class.getSimpleName();
 
-    // members we will use on the main activity screen
-
     private MedicationDatabase medDb;
     private MedAdapter medAdapter;
 
