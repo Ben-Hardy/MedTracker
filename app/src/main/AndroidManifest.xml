@@ -11,8 +11,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +24,9 @@
         <activity
             android:name=".ViewMedicationActivity"
             android:label="@string/title_activity_view_medication"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".DeleteMedication" />
+        <activity android:name=".UpdateMedicationActivity"></activity>
     </application>
 
 </manifest>

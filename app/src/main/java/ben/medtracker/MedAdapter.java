@@ -75,4 +75,13 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
             mItemClickListener.onItemClickListener(elementId);
         }
     }
+
+    public MedicationEntry getEntryById (int id) {
+        for (MedicationEntry entry : mMedEntries) {
+            if (entry.getId() == id)
+                return entry;
+        }
+        return null;
+    }
+
 }

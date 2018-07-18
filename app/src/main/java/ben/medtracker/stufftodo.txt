@@ -7,13 +7,13 @@ create an activity for viewing details of a medication on touching it on main sc
 back end functionality:
     add medication - DONE
     view medication - DONE
-    delete medication - TODO
-    modify medication - TODO
+    delete medication - DONE
+    modify/update medication - TODO/DONE-ISH
     add whether or not a medication was taken on a given day (last column in database schema) - TODO
 Add notifications to remind to take medications - TODO
     - at time given by user?
 Swipe functionality on main screen for each medication - TODO
-    - left == delete (with confirmation prompt?) - TODO
+    - left == delete (with confirmation prompt?) - NOPE - moved to view medication activity.
     - right == took medication (add to database) - TODO
         - need undo for this or a prompt - TODO
 Make the app not look horrible - TODO

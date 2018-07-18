@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:id="@+id/med_name_et"
+        android:id="@+id/update_name_et"
         android:hint="@string/med_name_query"
         android:paddingBottom="10dp"
         />
@@ -19,7 +19,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:id="@+id/med_daily_req_et"
+        android:id="@+id/update_daily_req_et"
         android:hint="@string/med_freq_query"
         android:paddingBottom="10dp"
         />
@@ -38,21 +38,21 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/monday_cb"
+            android:id="@+id/update_monday_cb"
             android:text="@string/monday"
 
             />
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/tuesday_cb"
+            android:id="@+id/update_tuesday_cb"
             android:text="@string/tuesday"
 
             />
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/wednesday_cb"
+            android:id="@+id/update_wednesday_cb"
             android:text="@string/wednesday"
 
             />
@@ -60,7 +60,7 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/thursday_cb"
+            android:id="@+id/update_thursday_cb"
             android:text="@string/thursday"
 
 
@@ -68,14 +68,14 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/friday_cb"
+            android:id="@+id/update_friday_cb"
             android:text="@string/friday"
 
             />
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/saturday_cb"
+            android:id="@+id/_update_saturday_cb"
             android:text="@string/saturday"
 
             />
@@ -91,23 +91,23 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/doc_notes_et"
+        android:id="@+id/update_doc_notes_et"
         android:hint="@string/doc_notes_query"
+        android:inputType="" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/update_med_button"
+        android:text="@string/update_medication"
+        android:gravity="center"
         />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/add_med_button"
-        android:text="@string/add_med_button_text"
-        android:layout_gravity="center"
-        />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/add_go_home_button"
-        android:text="@string/go_home"
+        android:id="@+id/cancel_update_button"
+        android:text="@string/cancel_update"
         android:layout_gravity="center"
         />
 

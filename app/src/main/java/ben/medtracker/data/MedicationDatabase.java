@@ -14,7 +14,7 @@ import android.util.Log;
     Thanks to them for teaching me how to make all this stuff!
  */
 
-@Database(entities = {MedicationEntry.class}, version = 1, exportSchema = false)
+@Database(entities = {MedicationEntry.class}, version = 2, exportSchema = false)
 public abstract class MedicationDatabase extends RoomDatabase{
 
     private static final String LOG_TAG = MedicationDatabase.class.getSimpleName();
@@ -29,7 +29,8 @@ public abstract class MedicationDatabase extends RoomDatabase{
         if (medicationDatabase == null) {
             synchronized (LOCK) {
                 medicationDatabase = Room.databaseBuilder(context.getApplicationContext(),
-                        MedicationDatabase.class, MedicationDatabase.DATABASE_NAME).build();
+                        MedicationDatabase.class, MedicationDatabase.DATABASE_NAME)
+                        .build();
                 Log.d(LOG_TAG, "Medication database created!");
             }
         }

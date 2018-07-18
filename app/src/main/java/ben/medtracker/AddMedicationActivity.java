@@ -36,9 +36,8 @@ public class AddMedicationActivity extends AppCompatActivity {
     CheckBox saturdayCheckBox;
     CheckBox sundayCheckBox;
 
+    Button goHomeButton;
     Button addMedicationButton;
-
-    private int mId = DEFAULT_ID;
 
     private MedicationDatabase medDb;
 
@@ -47,6 +46,15 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_add_medication);
 
+        initializeUI();
+
+        medDb = MedicationDatabase.getDatabase(getApplicationContext());
+
+        addMedicationButton.setOnClickListener(onAddMedicationButtonClicked());
+        goHomeButton.setOnClickListener(onGoHomeButtonClicked());
+    }
+
+    public void initializeUI() {
         medNameEditText = findViewById(R.id.med_name_et);
         dailyFrequencyEditText = findViewById(R.id.med_daily_req_et);
         docNotesEditText = findViewById(R.id.doc_notes_et);
@@ -60,18 +68,13 @@ public class AddMedicationActivity extends AppCompatActivity {
         sundayCheckBox = findViewById(R.id.sunday_cb);
 
         addMedicationButton = findViewById(R.id.add_med_button);
+        goHomeButton = findViewById(R.id.add_go_home_button);
+    }
 
-        medDb = MedicationDatabase.getDatabase(getApplicationContext());
-
-        if (savedInstanceState != null && savedInstanceState.containsKey(INSTANCE_ID)) {
-            mId = savedInstanceState.getInt(INSTANCE_ID, DEFAULT_ID);
-        }
-
-
-
-        addMedicationButton.setOnClickListener(new View.OnClickListener() {
+    public View.OnClickListener onAddMedicationButtonClicked() {
+        return new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View v) {
                 if (medNameEditText.getText().toString().isEmpty() &&
                         dailyFrequencyEditText.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please Enter a name and daily frequency!", Toast.LENGTH_LONG).show();
@@ -80,17 +83,24 @@ public class AddMedicationActivity extends AppCompatActivity {
                 } else if (dailyFrequencyEditText.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please Enter a daily frequency!", Toast.LENGTH_LONG).show();
                 } else {
-                    int dailyFreq = -1;
+                    int dailyFreqNum = -1;
+                    String dailyFreq = "";
 
                     try {
-                        dailyFreq = Integer.parseInt(dailyFrequencyEditText.getText().toString());
+                        dailyFreqNum = Integer.parseInt(dailyFrequencyEditText.getText().toString());
                     } catch (Exception e) {}
 
-                    if (dailyFreq < 0) {
+                    if (dailyFreqNum < 0) {
                         Toast.makeText(getApplicationContext(), "Daily Frequency must be a positive number!", Toast.LENGTH_LONG).show();
                     } else {
                         String medName = medNameEditText.getText().toString();
                         String docNotes = docNotesEditText.getText().toString();
+
+                        if (dailyFreqNum == 0) {
+                            dailyFreq = getString(R.string.as_needed);
+                        } else {
+                            dailyFreq = "" + dailyFreqNum;
+                        }
 
                         StringBuilder sb = new StringBuilder();
                         String schedule = "";
@@ -110,11 +120,9 @@ public class AddMedicationActivity extends AppCompatActivity {
                             if (sundayCheckBox.isChecked()) sb.append("s");
 
                             if (sb.toString().isEmpty())
-                                schedule = "As Needed";
+                                schedule = getString(R.string.as_needed);
                             else schedule = sb.toString();
                         }
-
-                        Toast.makeText(getApplicationContext(), schedule, Toast.LENGTH_LONG).show();
 
                         if (docNotes.isEmpty())
                             docNotes = "No notes given.";
@@ -137,13 +145,17 @@ public class AddMedicationActivity extends AppCompatActivity {
                     }
                 }
             }
-        });
-
-
-
+        };
     }
 
-
-
+    public View.OnClickListener onGoHomeButtonClicked() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent returnToMainIntent = new Intent(AddMedicationActivity.this, MainActivity.class);
+                startActivity(returnToMainIntent);
+            }
+        };
+    }
 
 }

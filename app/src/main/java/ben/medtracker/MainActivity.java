@@ -13,6 +13,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -57,9 +58,6 @@ public class MainActivity extends AppCompatActivity implements MedAdapter.ItemCl
         DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(decoration);
 
-
-
-
         addMedicationButton = findViewById(R.id.add_med_button_main);
 
         addMedicationButton.setOnClickListener(new View.OnClickListener() {
@@ -79,15 +77,8 @@ public class MainActivity extends AppCompatActivity implements MedAdapter.ItemCl
                 medAdapter.setMedEntries(medicationEntries);
             }
         });
-
-
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        medDb.medicationDao().clearMedicationDatabase();
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -104,7 +95,9 @@ public class MainActivity extends AppCompatActivity implements MedAdapter.ItemCl
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_delete) {
+            Intent deleteMedicationIntent = new Intent(MainActivity.this, DeleteMedication.class);
+            startActivity(deleteMedicationIntent);
             return true;
         }
 
@@ -113,9 +106,8 @@ public class MainActivity extends AppCompatActivity implements MedAdapter.ItemCl
 
     @Override
     public void onItemClickListener(int itemClicked) {
-        int itemClickedId = medAdapter.getMedEntries().get(itemClicked - 1).getId();
         Intent viewMedIntent = new Intent(MainActivity.this, ViewMedicationActivity.class);
-        viewMedIntent.putExtra(ViewMedicationActivity.EXTRA_MED_ID, itemClickedId);
+        viewMedIntent.putExtra(ViewMedicationActivity.EXTRA_MED_ID, itemClicked);
         startActivity(viewMedIntent);
     }
 }

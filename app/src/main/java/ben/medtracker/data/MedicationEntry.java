@@ -20,7 +20,7 @@ public class MedicationEntry {
     The number of times in which the medication needs to be taken on a daily basis
      */
     @ColumnInfo(name = "daily_frequency")
-    private int dailyFrequency;
+    private String dailyFrequency;
 
     /*
     A string representing which days in which the medication needs to be taken
@@ -45,7 +45,7 @@ public class MedicationEntry {
     private String dailyEntries;
 
     @Ignore
-    public MedicationEntry(String medicationName, int dailyFrequency, String weeklyFrequency,
+    public MedicationEntry(String medicationName, String dailyFrequency, String weeklyFrequency,
                            String docNotes) {
         this.medicationName = medicationName;
         this.dailyFrequency = dailyFrequency;
@@ -53,7 +53,7 @@ public class MedicationEntry {
         this.docNotes = docNotes;
     }
 
-    public MedicationEntry(int id, String medicationName, int dailyFrequency, String weeklyFrequency,
+    public MedicationEntry(int id, String medicationName, String dailyFrequency, String weeklyFrequency,
                            String docNotes) {
         this.id = id;
         this.medicationName = medicationName;
@@ -78,11 +78,11 @@ public class MedicationEntry {
         this.medicationName = medicationName;
     }
 
-    public int getDailyFrequency() {
+    public String getDailyFrequency() {
         return dailyFrequency;
     }
 
-    public void setDailyFrequency(int dailyFrequency) {
+    public void setDailyFrequency(String dailyFrequency) {
         this.dailyFrequency = dailyFrequency;
     }
 

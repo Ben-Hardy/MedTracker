@@ -34,8 +34,16 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/view_update_medication_button"
+        android:layout_gravity="center"
+        android:text="@string/update_medication"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/view_go_back_button"
-        android:layout_gravity="bottom|center"
+        android:layout_gravity="center"
         android:text="@string/go_back"
         />
 

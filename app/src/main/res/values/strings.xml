@@ -23,4 +23,12 @@
     <string name="daily_freq_end_label">\ time(s) per day.</string>
     <string name="no_doc_notes_label">No notes for this entry</string>
     <string name="doc_notes_label">Doctor\'s notes:\n</string>
+    <string name="delete_medication">Delete Medication</string>
+    <string name="delete_medication_prompt">Are you sure you wish to delete this medication?</string>
+    <string name="touch_the_medications_to_delete">Touch the Medications to delete.</string>
+    <string name="medication_delete_prompt">Are you sure you wish to delete this medication?</string>
+    <string name="update_medication">Update Medication</string>
+    <string name="cancel_update">Cancel Update</string>
+    <string name="as_needed">As needed</string>
+    <string name="go_home">Go Home</string>
 </resources>
