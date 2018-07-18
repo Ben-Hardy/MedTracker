@@ -30,13 +30,10 @@ public abstract class MedicationDatabase extends RoomDatabase{
             synchronized (LOCK) {
                 medicationDatabase = Room.databaseBuilder(context.getApplicationContext(),
                         MedicationDatabase.class, MedicationDatabase.DATABASE_NAME)
-
                         .build();
-                //Log.d(LOG_TAG, "Medication database created!");
             }
         }
         Log.d(LOG_TAG, "Fetching the database!");
         return medicationDatabase;
     }
-
 }

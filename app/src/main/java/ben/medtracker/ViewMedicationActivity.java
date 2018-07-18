@@ -30,10 +30,12 @@ public class ViewMedicationActivity extends AppCompatActivity {
     public static final String EXTRA_MED_ID = "extramedid";
     private static final int DEFAULT_MED_ID = -1;
     private static final String INSTANCE_MED_ID = "instancemedid";
+    public static final String EXTRA_MED_NAME = "extramedname";
 
     private static final String TAG = ViewMedicationActivity.class.getSimpleName();
 
     // UI elements
+    Button addLogEntryButton;
     Button updateMedicationButton;
     Button deleteMedicationButton;
     Button goBackButton;
@@ -101,6 +103,8 @@ public class ViewMedicationActivity extends AppCompatActivity {
                 }
             });
         }
+        addLogEntryButton = findViewById(R.id.view_add_log_entry_button);
+        addLogEntryButton.setOnClickListener(onAddEntryButtonClickedListener());
 
         updateMedicationButton = findViewById(R.id.view_update_medication_button);
         updateMedicationButton.setOnClickListener(onUpdateMedicationButtonClickedListener());
@@ -110,6 +114,17 @@ public class ViewMedicationActivity extends AppCompatActivity {
 
         goBackButton = findViewById(R.id.view_go_back_button);
         goBackButton.setOnClickListener(onGoBackButtonClickedListener());
+    }
+
+    public View.OnClickListener onAddEntryButtonClickedListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent addLogIntent = new Intent(ViewMedicationActivity.this, AddLogEntryActivity.class);
+                addLogIntent.putExtra(EXTRA_MED_NAME,medNameTextView.getText().toString());
+                startActivity(addLogIntent);
+            }
+        };
     }
 
     /*

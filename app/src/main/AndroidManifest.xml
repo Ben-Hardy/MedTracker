@@ -25,7 +25,8 @@
             android:name=".ViewMedicationActivity"
             android:label="@string/title_activity_view_medication"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".UpdateMedicationActivity"></activity>
+        <activity android:name=".UpdateMedicationActivity" />
+        <activity android:name=".AddLogEntryActivity"></activity>
     </application>
 
 </manifest>

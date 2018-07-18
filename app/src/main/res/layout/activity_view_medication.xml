@@ -34,6 +34,14 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/view_add_log_entry_button"
+        android:layout_gravity="center"
+        android:text="@string/add_log_entry"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/view_update_medication_button"
         android:layout_gravity="center"
         android:text="@string/update_medication"
