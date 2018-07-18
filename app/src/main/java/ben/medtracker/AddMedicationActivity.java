@@ -43,15 +43,11 @@ public class AddMedicationActivity extends AppCompatActivity {
 
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_add_medication);
 
         initializeUI();
 
         medDb = MedicationDatabase.getDatabase(getApplicationContext());
-
-        addMedicationButton.setOnClickListener(onAddMedicationButtonClicked());
-        goHomeButton.setOnClickListener(onGoHomeButtonClicked());
     }
 
     public void initializeUI() {
@@ -69,6 +65,8 @@ public class AddMedicationActivity extends AppCompatActivity {
 
         addMedicationButton = findViewById(R.id.add_med_button);
         goHomeButton = findViewById(R.id.add_go_home_button);
+        addMedicationButton.setOnClickListener(onAddMedicationButtonClicked());
+        goHomeButton.setOnClickListener(onGoHomeButtonClicked());
     }
 
     public View.OnClickListener onAddMedicationButtonClicked() {

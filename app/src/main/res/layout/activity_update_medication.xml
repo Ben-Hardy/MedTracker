@@ -7,12 +7,11 @@
     android:paddingHorizontal="20sp"
     >
 
-    <EditText
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:id="@+id/update_name_et"
-        android:hint="@string/med_name_query"
+        android:id="@+id/update_name_tv"
         android:paddingBottom="10dp"
         />
     <EditText

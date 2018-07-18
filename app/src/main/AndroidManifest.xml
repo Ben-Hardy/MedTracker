@@ -25,7 +25,6 @@
             android:name=".ViewMedicationActivity"
             android:label="@string/title_activity_view_medication"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".DeleteMedication" />
         <activity android:name=".UpdateMedicationActivity"></activity>
     </application>
 

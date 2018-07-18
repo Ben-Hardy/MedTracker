@@ -1,6 +1,5 @@
 package ben.medtracker.data;
 
-
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
@@ -9,11 +8,15 @@ import android.arch.persistence.room.PrimaryKey;
 @Entity(tableName = "medication")
 public class MedicationEntry {
 
+    /*
+    The identity used my the MedicationDatabase to identify the medication. Not user-facing
+     */
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-
-
+    /*
+    The name of the medication
+     */
     private String medicationName;
 
     /*
@@ -44,6 +47,13 @@ public class MedicationEntry {
     @ColumnInfo(name = "daily_entries")
     private String dailyEntries;
 
+    /*
+    Two constructors for the class. The First is used when creating new medications since we won't
+    know what id the database will use for the medication.
+
+    The second constructor is used by Room to add to the database and used when updating an entry
+    in the database
+     */
     @Ignore
     public MedicationEntry(String medicationName, String dailyFrequency, String weeklyFrequency,
                            String docNotes) {
@@ -62,6 +72,10 @@ public class MedicationEntry {
         this.docNotes = docNotes;
     }
 
+
+    /*
+    The required Getters and Setters for a Room Database
+     */
     public int getId() {
         return id;
     }

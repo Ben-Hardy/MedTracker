@@ -34,15 +34,18 @@ public class ViewMedicationActivity extends AppCompatActivity {
     private static final String TAG = ViewMedicationActivity.class.getSimpleName();
 
     Button updateMedicationButton;
+    Button deleteMedicationButton;
     Button goBackButton;
 
     TextView medNameTextView;
     TextView dailyFreqTextView;
     TextView weeklyFreqTextView;
     TextView docNotesTextView;
-    private int medId;
 
+    private int medId;
     private MedicationDatabase medDb;
+
+    private MedicationEntry entryToDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +56,12 @@ public class ViewMedicationActivity extends AppCompatActivity {
             medId = savedInstanceState.getInt(INSTANCE_MED_ID);
 
         medDb = MedicationDatabase.getDatabase(getApplicationContext());
+        //Log.d(TAG, "Successfully retrieved DB");
 
-        Log.d(TAG, "Successfully retrieved DB");
+        initializeUI();
+    }
 
+    public void initializeUI() {
         medNameTextView = findViewById(R.id.view_med_name_tv);
         dailyFreqTextView = findViewById(R.id.view_daily_freq_tv);
         weeklyFreqTextView = findViewById(R.id.view_weekly_freq_tv);
@@ -79,29 +85,73 @@ public class ViewMedicationActivity extends AppCompatActivity {
                     dailyFreqTextView.setText(medicationEntry.getDailyFrequency());
                     weeklyFreqTextView.setText(medicationEntry.getWeeklyFrequency());
                     docNotesTextView.setText(medicationEntry.getDocNotes());
+                    entryToDelete = medicationEntry;
                 }
             });
         }
 
         updateMedicationButton = findViewById(R.id.view_update_medication_button);
-        updateMedicationButton.setOnClickListener(new View.OnClickListener() {
+        updateMedicationButton.setOnClickListener(onUpdateMedicationButtonClickedListener());
+
+        deleteMedicationButton = findViewById(R.id.view_delete_medication_button);
+        deleteMedicationButton.setOnClickListener(onDeleteButtonClickedListener());
+
+        goBackButton = findViewById(R.id.view_go_back_button);
+        goBackButton.setOnClickListener(onGoBackButtonClickedListener());
+    }
+
+    public View.OnClickListener onUpdateMedicationButtonClickedListener() {
+        return new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
                 Intent intent = new Intent(ViewMedicationActivity.this, UpdateMedicationActivity.class);
                 intent.putExtra(EXTRA_MED_ID, medId);
                 startActivity(intent);
             }
-        });
+        };
+    }
 
-        goBackButton = findViewById(R.id.view_go_back_button);
+    public View.OnClickListener onDeleteButtonClickedListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(ViewMedicationActivity.this);
+                builder.setMessage(R.string.medication_delete_prompt)
+                        .setPositiveButton("DELETE", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        medDb.medicationDao().deleteMedication(entryToDelete);
+                                    }
+                                });
+                                Intent mainIntent = new Intent(ViewMedicationActivity.this, MainActivity.class);
+                                startActivity(mainIntent);
+                            }
+                        })
+                        .setNegativeButton("CANCEL", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //
+                            }
+                        });
 
-        goBackButton.setOnClickListener(new View.OnClickListener() {
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        };
+    }
+
+
+
+    public View.OnClickListener onGoBackButtonClickedListener() {
+        return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent mainIntent = new Intent(ViewMedicationActivity.this, MainActivity.class);
                 startActivity(mainIntent);
             }
-        });
-
+        };
     }
 }

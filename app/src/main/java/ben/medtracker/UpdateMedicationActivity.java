@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import ben.medtracker.data.MedicationDatabase;
@@ -24,7 +25,7 @@ public class UpdateMedicationActivity extends AppCompatActivity {
     private static final int DEFAULT_MED_ID = -1;
     private static final String INSTANCE_MED_ID = "instancemedid";
 
-    EditText medicationNameEditText;
+    TextView medicationNameTextView;
     EditText dailyReqEditText;
     EditText docNotesEditText;
 
@@ -65,7 +66,7 @@ public class UpdateMedicationActivity extends AppCompatActivity {
     }
 
     public void initializeUI() {
-        medicationNameEditText = findViewById(R.id.update_name_et);
+        medicationNameTextView = findViewById(R.id.update_name_tv);
         dailyReqEditText = findViewById(R.id.update_daily_req_et);
         docNotesEditText = findViewById(R.id.update_doc_notes_et);
 
@@ -95,7 +96,7 @@ public class UpdateMedicationActivity extends AppCompatActivity {
                 public void onChanged(@Nullable MedicationEntry medicationEntry) {
                     medicationViewModel.getMedication().removeObserver(this);
 
-                    medicationNameEditText.setText(medicationEntry.getMedicationName());
+                    medicationNameTextView.setText(medicationEntry.getMedicationName());
 
                     if (medicationEntry.getDailyFrequency().equals(getString(R.string.as_needed))) {
                         dailyReqEditText.setText("0");
@@ -104,8 +105,6 @@ public class UpdateMedicationActivity extends AppCompatActivity {
                     }
 
                     docNotesEditText.setText(medicationEntry.getDocNotes());
-
-
                 }
             });
         }
@@ -124,12 +123,7 @@ public class UpdateMedicationActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (medicationNameEditText.getText().toString().isEmpty() &&
-                        dailyReqEditText.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please Enter a name and daily frequency!", Toast.LENGTH_LONG).show();
-                } else if (medicationNameEditText.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Please Enter a name!", Toast.LENGTH_LONG).show();
-                } else if (dailyReqEditText.getText().toString().isEmpty()) {
+                if (dailyReqEditText.getText().toString().isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Please Enter a daily frequency!", Toast.LENGTH_LONG).show();
                 } else {
                     int dailyFreqNum = -1;
@@ -142,7 +136,7 @@ public class UpdateMedicationActivity extends AppCompatActivity {
                     if (dailyFreqNum < 0) {
                         Toast.makeText(getApplicationContext(), "Daily Frequency must be a positive number!", Toast.LENGTH_LONG).show();
                     } else {
-                        String medName = medicationNameEditText.getText().toString();
+                        String medName = medicationNameTextView.getText().toString();
                         String docNotes = docNotesEditText.getText().toString();
 
                         if (dailyFreqNum == 0) {
@@ -176,7 +170,9 @@ public class UpdateMedicationActivity extends AppCompatActivity {
                         if (docNotes.isEmpty())
                             docNotes = "No notes given.";
 
-                        final MedicationEntry medicationEntry = new MedicationEntry(medName,
+                        // have to use the constructor with the id parameter or else the Room update
+                        // query will not work correctly
+                        final MedicationEntry medicationEntry = new MedicationEntry(medId, medName,
                                 dailyFreq, schedule, docNotes);
 
                         AppExecutors.getInstance().diskIO().execute(new Runnable() {
