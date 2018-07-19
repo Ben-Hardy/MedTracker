@@ -8,9 +8,12 @@ back end functionality:
     view medication - DONE
     delete medication - DONE
     modify/update medication - DONE
-    add whether or not a medication was taken on a given day (last column in database schema -NOT THAT) - TODO
-        - create new database for this rather than try and use one column since that's way to clunky - TODO
-        - create add, view, and delete Activities for these log entries, or perhaps incorporate adding
+    add whether or not a medication was taken on a given day (last column in database schema -NOT THAT) - TODO/PARTIAL
+        - create new database for this rather than try and use one column since that's way to clunky - DONE
+        - create add (DONE),
+                 view(TODO),
+                 delete(TODO)
+         for these log entries, or perhaps incorporate adding
           into existing views??????? - TODO
 Add notifications to remind to take medications - TODO
     - at time given by user?

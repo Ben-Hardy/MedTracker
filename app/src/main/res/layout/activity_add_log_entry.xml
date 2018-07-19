@@ -1,9 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AddLogEntryActivity">
+    android:layout_gravity="center"
+    android:gravity="left|center"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp"
+    >
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_entry_med_name_tv"
+        android:gravity="left"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_entry_num_doses_et"
+        android:hint="@string/how_much_of_this_medication_did_you_take"
+        android:gravity="left"
+        />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_entry_notes_et"
+        android:hint="@string/any_note_or_observations"
+        android:gravity="left"
+        />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_entry_add_entry_button"
+        android:text="@string/add_entry"
+        android:gravity="left"
+        />
+
+
+</LinearLayout>
