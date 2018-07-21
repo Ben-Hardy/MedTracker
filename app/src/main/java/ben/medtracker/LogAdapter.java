@@ -14,20 +14,20 @@ import java.util.Locale;
 
 import ben.medtracker.data.MedicationLogEntry;
 
-public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.EntryViewHolder> {
+public class LogAdapter extends RecyclerView.Adapter<LogAdapter.EntryViewHolder> {
 
     private static final String DATE_FORMAT = "dd/MM/yyy";
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
 
     private List<MedicationLogEntry> logEntries;
     private Context context;
-    final private EntryAdapter.ItemClickListener itemClickListener;
+    final private LogAdapter.ItemClickListener itemClickListener;
 
     public interface ItemClickListener {
         void onItemClickListener(int itemId);
     }
 
-    public EntryAdapter(Context context, ItemClickListener listener) {
+    public LogAdapter(Context context, ItemClickListener listener) {
         this.context = context;
         itemClickListener = listener;
     }
@@ -83,5 +83,13 @@ public class EntryAdapter extends RecyclerView.Adapter<EntryAdapter.EntryViewHol
             int elementId = logEntries.get(getAdapterPosition()).getId();
             itemClickListener.onItemClickListener(elementId);
         }
+    }
+
+    public MedicationLogEntry getEntryById (int id) {
+        for (MedicationLogEntry entry : logEntries) {
+            if (entry.getId() == id)
+                return entry;
+        }
+        return null;
     }
 }

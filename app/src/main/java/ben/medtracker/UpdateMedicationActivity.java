@@ -92,10 +92,10 @@ public class UpdateMedicationActivity extends AppCompatActivity {
         if (intent != null && intent.hasExtra(EXTRA_MED_ID)) {
             medId = intent.getIntExtra(EXTRA_MED_ID, DEFAULT_MED_ID);
 
-            AddMedicationViewModelFactory factory = new AddMedicationViewModelFactory(medDb, medId);
+            ViewMedicationViewModelFactory factory = new ViewMedicationViewModelFactory(medDb, medId);
 
-            final AddMedicationViewModel medicationViewModel = ViewModelProviders.of(this, factory)
-                    .get(AddMedicationViewModel.class);
+            final ViewMedicationViewModel medicationViewModel = ViewModelProviders.of(this, factory)
+                    .get(ViewMedicationViewModel.class);
 
             medicationViewModel.getMedication().observe(this, new Observer<MedicationEntry>() {
                 @Override

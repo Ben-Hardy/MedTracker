@@ -1,24 +1,16 @@
 package ben.medtracker;
 
-import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.List;
 
 import ben.medtracker.data.MedicationDatabase;
 import ben.medtracker.data.MedicationEntry;
@@ -88,9 +80,9 @@ public class ViewMedicationActivity extends AppCompatActivity {
             fetch the data for the MedicationEntry being viewed. We also will use this access to
             store the entry in case we want to delete it rather than using two LiveData accesses.
             */
-            AddMedicationViewModelFactory factory = new AddMedicationViewModelFactory(medDb, medId);
-            final AddMedicationViewModel medicationViewModel = ViewModelProviders.of(this, factory)
-                    .get(AddMedicationViewModel.class);
+            ViewMedicationViewModelFactory factory = new ViewMedicationViewModelFactory(medDb, medId);
+            final ViewMedicationViewModel medicationViewModel = ViewModelProviders.of(this, factory)
+                    .get(ViewMedicationViewModel.class);
             medicationViewModel.getMedication().observe(this, new Observer<MedicationEntry>() {
                 @Override
                 public void onChanged(@Nullable MedicationEntry medicationEntry) {
