@@ -1,7 +1,7 @@
 create database - DONE
 create activities for main screen and adding a medication - DONE
-create viewmodel for medication - DONE/IN PROGRESS
-create an activity for viewing details of a medication on touching it on main screen - IN PROGRESS
+create viewmodel for medication - DONE
+create an activity for viewing details of a medication on touching it on main screen - DONE
 
 back end functionality:
     add medication - DONE

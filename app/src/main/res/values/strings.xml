@@ -37,4 +37,7 @@
     <string name="any_note_or_observations">Any note or observations? (Optional)</string>
     <string name="add_entry">Add Entry</string>
     <string name="add_entry_toast">Please enter how much you took!</string>
+    <string name="view_my_medications">View My Medications</string>
+    <string name="view_my_entries">View My Entries</string>
+    <string name="refresh">Refresh</string>
 </resources>

@@ -12,7 +12,7 @@ import android.util.Log;
 Identical to the Medication Database in implementation. See notes in that file for where
 I based this code off of.
  */
-@Database(entities = {MedicationLogEntry.class}, version = 1, exportSchema = false)
+@Database(entities = {MedicationLogEntry.class}, version = 3, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class MedicationLogDatabase extends RoomDatabase{
 
@@ -29,6 +29,7 @@ public abstract class MedicationLogDatabase extends RoomDatabase{
             synchronized (LOCK) {
                 logDatabase = Room.databaseBuilder(context.getApplicationContext(),
                         MedicationLogDatabase.class, MedicationLogDatabase.DATABASE_NAME)
+                        .fallbackToDestructiveMigration()
                         .build();
             }
         }

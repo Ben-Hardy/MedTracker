@@ -146,7 +146,7 @@ public class AddMedicationActivity extends AppCompatActivity {
 
                         });
 
-                        Intent backToMainActivity = new Intent(AddMedicationActivity.this, MainActivity.class);
+                        Intent backToMainActivity = new Intent(AddMedicationActivity.this, ViewMedicationListActivity.class);
                         startActivity(backToMainActivity);
                     }
                 }
@@ -159,7 +159,7 @@ public class AddMedicationActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent returnToMainIntent = new Intent(AddMedicationActivity.this, MainActivity.class);
+                Intent returnToMainIntent = new Intent(AddMedicationActivity.this, ViewMedicationListActivity.class);
                 startActivity(returnToMainIntent);
             }
         };

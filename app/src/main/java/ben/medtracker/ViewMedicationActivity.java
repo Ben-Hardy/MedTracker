@@ -160,7 +160,7 @@ public class ViewMedicationActivity extends AppCompatActivity {
                                         medDb.medicationDao().deleteMedication(entryToDelete);
                                     }
                                 });
-                                Intent mainIntent = new Intent(ViewMedicationActivity.this, MainActivity.class);
+                                Intent mainIntent = new Intent(ViewMedicationActivity.this, ViewMedicationListActivity.class);
                                 startActivity(mainIntent);
                             }
                         })
@@ -186,7 +186,7 @@ public class ViewMedicationActivity extends AppCompatActivity {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent mainIntent = new Intent(ViewMedicationActivity.this, MainActivity.class);
+                Intent mainIntent = new Intent(ViewMedicationActivity.this, ViewMedicationListActivity.class);
                 startActivity(mainIntent);
             }
         };

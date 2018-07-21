@@ -20,24 +20,30 @@ public class MedicationLogEntry {
     @ColumnInfo(name="num_doses_taken")
     private String numDosesTaken;
     @ColumnInfo(name="date_taken")
-    private Date dateTaken;
+    private String dateTaken;
+
+
+
+    private String timeTaken;
 
     private String notes;
 
     @Ignore
-    public MedicationLogEntry(String medicationName, String numDosesTaken, Date dateTaken,
-    String notes) {
+    public MedicationLogEntry(String medicationName, String numDosesTaken, String dateTaken,
+    String timeTaken, String notes) {
         this.medicationName = medicationName;
         this.numDosesTaken = numDosesTaken;
         this.dateTaken = dateTaken;
+        this.timeTaken = timeTaken;
         this.notes = notes;
     }
 
-    public MedicationLogEntry(int id, String medicationName, String numDosesTaken, Date dateTaken,
-                              String notes) {
+    public MedicationLogEntry(int id, String medicationName, String numDosesTaken, String dateTaken,
+                              String timeTaken, String notes) {
         this.medicationName = medicationName;
         this.numDosesTaken = numDosesTaken;
         this.dateTaken = dateTaken;
+        this.timeTaken = timeTaken;
         this.notes = notes;
     }
 
@@ -66,11 +72,11 @@ public class MedicationLogEntry {
         this.numDosesTaken = numDosesTaken;
     }
 
-    public Date getDateTaken() {
+    public String getDateTaken() {
         return dateTaken;
     }
 
-    public void setDateTaken(Date dateTaken) {
+    public void setDateTaken(String dateTaken) {
         this.dateTaken = dateTaken;
     }
 
@@ -80,5 +86,13 @@ public class MedicationLogEntry {
 
     public void setNotes(String notes) {
         this.notes = notes;
+    }
+
+    public String getTimeTaken() {
+        return timeTaken;
+    }
+
+    public void setTimeTaken(String timeTaken) {
+        this.timeTaken = timeTaken;
     }
 }

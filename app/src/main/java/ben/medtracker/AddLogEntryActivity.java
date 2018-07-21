@@ -1,6 +1,8 @@
 package ben.medtracker;
 
+import android.arch.lifecycle.Observer;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +12,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Locale;
 
 import ben.medtracker.data.DateConverter;
 import ben.medtracker.data.MedicationLogDatabase;
@@ -20,7 +25,11 @@ public class AddLogEntryActivity extends AppCompatActivity {
 
     public static final String LOG = AddLogEntryActivity.class.getSimpleName();
     public static final String EXTRA_MED_NAME = "extramedname";
-    private static final String DATE_FORMAT = "dd/MM/yyy";
+    private static final String DATE_FORMAT = "MM/dd/yyyy";
+    private static final String TIME_FORMAT = "h:mm:ss";
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
+    private final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault());
+
 
     TextView medicationNameTextView;
     EditText doseAmountTextView;
@@ -56,6 +65,8 @@ public class AddLogEntryActivity extends AppCompatActivity {
         addEntryButton.setOnClickListener(onAddEntryButtonClickedListener());
     }
 
+    int numEntries;
+
     public View.OnClickListener onAddEntryButtonClickedListener() {
         return new View.OnClickListener() {
             @Override
@@ -71,8 +82,14 @@ public class AddLogEntryActivity extends AppCompatActivity {
                     } else {
                         notes = notesTextView.getText().toString();
                     }
+                    Date dateTimeStamp = new Date();
+                    String date = dateFormat.format(dateTimeStamp);
+                    String time = timeFormat.format(dateTimeStamp);
 
-                    final MedicationLogEntry entry = new MedicationLogEntry(medicationName, dosage, new Date(), notes);
+                    Log.d(LOG, "Entry: name: " + medicationNameTextView.getText().toString()
+                    + " dosage: " + dosage + " notes: " + notes + " date: " + date);
+                    final MedicationLogEntry entry = new MedicationLogEntry(medicationName,
+                            dosage, date, time, notes);
 
                     AppExecutors.getInstance().diskIO().execute(new Runnable() {
                         @Override
@@ -80,6 +97,13 @@ public class AddLogEntryActivity extends AppCompatActivity {
                             logDb.logDao().insertLogEntry(entry);
                         }
                     });
+                    logDb.logDao().loadMedicationEntries().observe(AddLogEntryActivity.this, new Observer<List<MedicationLogEntry>>() {
+                        @Override
+                        public void onChanged(@Nullable List<MedicationLogEntry> medicationLogEntries) {
+                            Log.d(LOG, "Number of log entries: " + medicationLogEntries.size());
+                        }
+                    });
+
                     Log.d(LOG, "Added new log entry");
                     onBackPressed();
                 }
