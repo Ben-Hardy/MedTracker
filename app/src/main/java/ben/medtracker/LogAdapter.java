@@ -76,7 +76,6 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.EntryViewHolder>
             logDateTextView = view.findViewById(R.id.log_date);
             logTimeTextView = view.findViewById(R.id.log_time);
             view.setOnClickListener(this);
-
         }
         @Override
         public void onClick(View view) {

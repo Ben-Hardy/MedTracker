@@ -40,6 +40,7 @@ public class MedicationLogEntry {
 
     public MedicationLogEntry(int id, String medicationName, String numDosesTaken, String dateTaken,
                               String timeTaken, String notes) {
+        this.id = id;
         this.medicationName = medicationName;
         this.numDosesTaken = numDosesTaken;
         this.dateTaken = dateTaken;

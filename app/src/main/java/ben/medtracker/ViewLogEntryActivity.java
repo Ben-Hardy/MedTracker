@@ -67,12 +67,13 @@ public class ViewLogEntryActivity extends AppCompatActivity {
             logId = intent.getIntExtra(EXTRA_LOG_ID, -1);
             Log.d(TAG, "" + logId);
             ViewLogViewModelFactory factory = new ViewLogViewModelFactory(logDb, logId);
-            final ViewLogViewModel logViewModel = ViewModelProviders.of(this, factory)
+            final ViewLogViewModel logViewModel = ViewModelProviders.of(ViewLogEntryActivity.this, factory)
                     .get(ViewLogViewModel.class);
             logViewModel.getLogEntry().observe(this, new Observer<MedicationLogEntry>() {
                 @Override
                 public void onChanged(@Nullable MedicationLogEntry logEntry) {
                     logViewModel.getLogEntry().removeObserver(this);
+                    assert logEntry != null;
                     medNameTextView.setText(logEntry.getMedicationName());
                     dosesTextView.setText(logEntry.getNumDosesTaken());
                     dateTextView.setText(logEntry.getDateTaken());

@@ -19,11 +19,5 @@
         android:id="@+id/entrylist_go_home_button"
         android:text="@string/go_home"
         />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|center"
-        android:id="@+id/refresh_activity"
-        android:text="@string/refresh"
-        />
+
 </LinearLayout>
