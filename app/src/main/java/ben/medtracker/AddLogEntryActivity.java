@@ -36,6 +36,7 @@ public class AddLogEntryActivity extends AppCompatActivity {
     EditText notesTextView;
 
     Button addEntryButton;
+    Button goBackButton;
 
     String medicationName;
     Intent intent;
@@ -63,6 +64,9 @@ public class AddLogEntryActivity extends AppCompatActivity {
 
         addEntryButton = findViewById(R.id.add_entry_add_entry_button);
         addEntryButton.setOnClickListener(onAddEntryButtonClickedListener());
+
+        goBackButton = findViewById(R.id.add_entry_go_back_button);
+        goBackButton.setOnClickListener(onGoBackButtonClickedListener());
     }
 
     int numEntries;
@@ -110,4 +114,16 @@ public class AddLogEntryActivity extends AppCompatActivity {
             }
         };
     }
+
+    public View.OnClickListener onGoBackButtonClickedListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent backToEntriesViewIntent = new Intent(AddLogEntryActivity.this,
+                        ViewLogListActivity.class);
+                startActivity(backToEntriesViewIntent);
+            }
+        };
+    }
+
 }

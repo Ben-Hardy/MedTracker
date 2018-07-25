@@ -73,7 +73,6 @@ public class ViewLogEntryActivity extends AppCompatActivity {
                 @Override
                 public void onChanged(@Nullable MedicationLogEntry logEntry) {
                     logViewModel.getLogEntry().removeObserver(this);
-                    assert logEntry != null;
                     medNameTextView.setText(logEntry.getMedicationName());
                     dosesTextView.setText(logEntry.getNumDosesTaken());
                     dateTextView.setText(logEntry.getDateTaken());

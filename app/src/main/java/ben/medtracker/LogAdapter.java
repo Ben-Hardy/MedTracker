@@ -44,8 +44,10 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.EntryViewHolder>
     public void onBindViewHolder(@NonNull EntryViewHolder holder, int position) {
         MedicationLogEntry logEntry = logEntries.get(position);
         holder.medNameTextView.setText(logEntry.getMedicationName());
+        holder.dosageTextView.setText(logEntry.getNumDosesTaken());
         holder.logDateTextView.setText(logEntry.getDateTaken());
         holder.logTimeTextView.setText(logEntry.getTimeTaken());
+        holder.notesTextView.setText(logEntry.getNotes());
     }
 
     @Override
@@ -67,14 +69,18 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.EntryViewHolder>
     public class EntryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView medNameTextView;
+        TextView dosageTextView;
         TextView logDateTextView;
         TextView logTimeTextView;
+        TextView notesTextView;
 
         public EntryViewHolder(View view) {
             super(view);
             medNameTextView = view.findViewById(R.id.log_med_name);
+            dosageTextView = view.findViewById(R.id.log_dosage);
             logDateTextView = view.findViewById(R.id.log_date);
             logTimeTextView = view.findViewById(R.id.log_time);
+            notesTextView = view.findViewById(R.id.log_doc_notes);
             view.setOnClickListener(this);
         }
         @Override

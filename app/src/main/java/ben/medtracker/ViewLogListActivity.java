@@ -24,11 +24,6 @@ public class ViewLogListActivity extends AppCompatActivity implements LogAdapter
     // Logging tag
     private static final String TAG = ViewLogListActivity.class.getSimpleName();
     private static final String EXTRA_LOG_ID = "extralogid";
-    private static final String EXTRA_DOSES_ID = "extradosesid";
-    private static final String EXTRA_NAME_ID = "extranameid";
-    private static final String EXTRA_DATE_ID = "extradateid";
-    private static final String EXTRA_TIME_ID = "extratimeid";
-    private static final String EXTRA_NOTES_ID = "extranotesid";
 
     private MedicationLogDatabase logDb;
     private LogAdapter logAdapter;

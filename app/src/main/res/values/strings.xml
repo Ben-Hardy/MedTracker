@@ -42,4 +42,13 @@
     <string name="refresh">Refresh</string>
     <string name="delete_entry">Delete Entry</string>
     <string name="delete_log_prompt">Are you sure you wish to delete this entry?</string>
+    <string name="weekly_schedule">Weekly Schedule:</string>
+    <string name="num_per_day">Number Per Day:</string>
+    <string name="my_medications">My Medication</string>
+    <string name="medication_entries">Medication Entries</string>
+    <string name="add_entry_prompt">Add new entry?</string>
+    <string name="number_taken_dose_size">Number Taken/Dose Size:</string>
+    <string name="date_taken">Date taken:</string>
+    <string name="time_taken">Time taken:</string>
+    <string name="additional_notes">Additional Notes:</string>
 </resources>
