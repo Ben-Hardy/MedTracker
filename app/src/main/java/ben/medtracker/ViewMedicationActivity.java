@@ -88,8 +88,64 @@ public class ViewMedicationActivity extends AppCompatActivity {
                 public void onChanged(@Nullable MedicationEntry medicationEntry) {
                     medicationViewModel.getMedication().removeObserver(this);
                     medNameTextView.setText(medicationEntry.getMedicationName());
-                    dailyFreqTextView.setText(medicationEntry.getDailyFrequency());
-                    weeklyFreqTextView.setText(medicationEntry.getWeeklyFrequency());
+
+                    StringBuilder sb = new StringBuilder();
+
+                    sb.append("This medication is to be taken ");
+
+                    if (medicationEntry.getDailyFrequency().equals(getString(R.string.as_needed))) {
+                        sb.append("as needed.");
+                    } else {
+                        sb.append(medicationEntry.getDailyFrequency());
+                        sb.append(" time(s) per day.");
+                    }
+                    dailyFreqTextView.setText(sb.toString());
+
+                    sb = new StringBuilder();
+                    String weeklyFreqCode = medicationEntry.getWeeklyFrequency();
+
+                    if (weeklyFreqCode.equals(getString(R.string.daily))) {
+                        sb.append("This medication is to be taken daily.");
+                    } else if (weeklyFreqCode.equals(getString(R.string.as_needed))) {
+                        sb.append("This medication is to be taken as needed.");
+                    } else {
+                        sb.append("This medication is to be taken every ");
+
+                        for (int i = 0; i < weeklyFreqCode.length(); i++) {
+                            String day = "";
+                            char code = weeklyFreqCode.toCharArray()[i];
+                            if (code == 'M')
+                                day = "Monday";
+                            else if (code == 'T')
+                                day = "Tuesday";
+                            else if (code == 'W')
+                                day = "Wednesday";
+                            else if (code == 't')
+                                day = "Thursday";
+                            else if (code == 'F')
+                                day = "Friday";
+                            else if (code == 'S')
+                                day = "Saturday";
+                            else if (code == 's')
+                                day = "Sunday";
+
+                            if (i == 0 && weeklyFreqCode.length() == 1) {
+                                sb.append(day);
+                                sb.append(".");
+                            }
+                            else if (i == 0)
+                                sb.append(day);
+                            else if (weeklyFreqCode.length() > 1 && i == weeklyFreqCode.length() - 1) {
+                                sb.append(", and ");
+                                sb.append(day);
+                                sb.append(".");
+                            } else {
+                                sb.append(", ");
+                                sb.append(day);
+                            }
+                        }
+                    }
+                    weeklyFreqTextView.setText(sb.toString());
                     docNotesTextView.setText(medicationEntry.getDocNotes());
                     entryToDelete = medicationEntry;
                 }

@@ -51,7 +51,7 @@ public class ViewLogListActivity extends AppCompatActivity implements LogAdapter
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        recyclerView.getLayoutParams().height = (Integer) (displayMetrics.heightPixels * 70)/100;
+        recyclerView.getLayoutParams().height = (Integer) (displayMetrics.heightPixels * 60)/100;
 
         LogViewModel viewModel = ViewModelProviders.of(this).get(LogViewModel.class);
         viewModel.getLogs().observe(this, new Observer<List<MedicationLogEntry>>() {

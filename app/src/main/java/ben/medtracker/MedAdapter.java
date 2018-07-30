@@ -47,8 +47,6 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
         MedicationEntry entry = mMedEntries.get(position);
         String name = entry.getMedicationName();
         holder.medNameView.setText(name);
-        holder.medWeekFreqView.setText(context.getString(R.string.weekly_schedule) + entry.getWeeklyFrequency());
-        holder.medDailyFreqView.setText(context.getString(R.string.num_per_day) + entry.getDailyFrequency());
     }
 
     @Override
@@ -77,14 +75,10 @@ public class MedAdapter extends RecyclerView.Adapter<MedAdapter.MedViewHolder> {
     class MedViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView medNameView;
-        TextView medWeekFreqView;
-        TextView medDailyFreqView;
 
         public MedViewHolder (View medView) {
             super(medView);
             medNameView = medView.findViewById(R.id.medName);
-            medWeekFreqView = medView.findViewById(R.id.med_weekly_freq);
-            medDailyFreqView = medView.findViewById(R.id.med_view_daily_freq);
             medView.setOnClickListener(this);
         }
 

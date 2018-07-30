@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:layout_margin="16dp"
+    android:padding="16dp"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <TextView
@@ -14,6 +14,7 @@
         android:layout_marginTop="40dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/colorPrimary"
+        app:layout_goneMarginTop="16dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,59 +24,64 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/view_entry_med_name_tv"
-        android:layout_marginTop="32dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:id="@+id/dose_size_label"
         android:text="@string/number_taken_dose_size"
+        android:layout_marginTop="16dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+        android:textColor="@color/colorPrimary"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/view_entry_doses_tv"
-        app:layout_constraintTop_toBottomOf="@id/view_entry_med_name_tv"
-        android:layout_marginTop="32dp"
-        app:layout_constraintLeft_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dose_size_label"
+        app:layout_constraintLeft_toLeftOf="@id/dose_size_label"
+        tools:text="4"
 
         />
 
     <TextView
+        android:id="@+id/date_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/date_label"
         android:text="@string/date_taken"
+        app:layout_constraintLeft_toLeftOf="@id/dose_size_label"
         app:layout_constraintTop_toBottomOf="@id/view_entry_doses_tv"
-        android:layout_marginTop="32dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        />
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="16dp"
+        tools:text="Date Taken" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/view_entry_date_tv"
-        app:layout_constraintTop_toBottomOf="@id/view_entry_doses_tv"
-        android:layout_marginTop="32dp"
-        app:layout_constraintLeft_toRightOf="@id/date_label"
+        app:layout_constraintTop_toBottomOf="@id/date_label"
+        tools:text="11/11/1111"
+        app:layout_constraintLeft_toLeftOf="@id/date_label"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+        android:textColor="@color/colorPrimary"
         android:id="@+id/time_label"
+        android:layout_marginTop="16dp"
         android:text="@string/time_taken"
         app:layout_constraintTop_toBottomOf="@id/view_entry_date_tv"
-        android:layout_marginTop="32dp"
         app:layout_constraintLeft_toLeftOf="parent"
         />
 
     <TextView
+        android:id="@+id/view_entry_time_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/view_entry_time_tv"
-        app:layout_constraintTop_toBottomOf="@id/view_entry_date_tv"
-        android:layout_marginTop="32dp"
-        app:layout_constraintLeft_toRightOf="@id/time_label"
-        />
+        app:layout_constraintLeft_toLeftOf="@id/time_label"
+        app:layout_constraintTop_toBottomOf="@id/time_label"
+        tools:text="00:00" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -83,39 +89,42 @@
         android:id="@+id/notes_label"
         android:text="@string/additional_notes"
         app:layout_constraintTop_toBottomOf="@id/view_entry_time_tv"
-        android:layout_marginTop="32dp"
         app:layout_constraintLeft_toLeftOf="parent"
+        android:textAppearance="@style/TextAppearance.AppCompat.Light.Widget.PopupMenu.Large"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="16dp"
         />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/view_entry_notes_tv"
-        app:layout_constraintTop_toBottomOf="@id/view_entry_time_tv"
-        android:layout_marginTop="32dp"
-        app:layout_constraintLeft_toRightOf="@id/notes_label"
-
+        app:layout_constraintTop_toBottomOf="@id/notes_label"
+        app:layout_constraintLeft_toLeftOf="@id/notes_label"
+        tools:text="Notes go here"
         />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/view_entry_delete_button"
-        android:text="@string/delete_entry"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/view_entry_go_back_button"
-        />
-
-    <Button
+        style="?android:attr/borderlessButtonStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/view_entry_go_back_button"
-        android:text="@string/go_back"
+        android:text="@string/delete_entry"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toTopOf="@id/view_entry_go_back_button"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/view_entry_go_back_button"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="32dp"
-        />
+        android:text="@string/go_back"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

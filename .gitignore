@@ -63,3 +63,5 @@ local.properties
 .gradle/4.4/fileHashes/fileHashes.bin
 .gradle/4.4/javaCompile/classAnalysis.bin
 local.properties
+*.bin
+.gradle/4.4/fileHashes/fileHashes.bin

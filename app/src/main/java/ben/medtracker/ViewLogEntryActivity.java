@@ -23,12 +23,6 @@ public class ViewLogEntryActivity extends AppCompatActivity {
 
     private static final String TAG = ViewLogViewModel.class.getSimpleName();
     private static final String EXTRA_LOG_ID = "extralogid";
-    private static final String EXTRA_NAME_ID = "extranameid";
-    private static final String EXTRA_DOSES_ID = "extradosesid";
-    private static final String EXTRA_DATE_ID = "extradateid";
-    private static final String EXTRA_TIME_ID = "extratimeid";
-    private static final String EXTRA_NOTES_ID = "extranotesid";
-
 
     TextView medNameTextView;
     TextView dosesTextView;
