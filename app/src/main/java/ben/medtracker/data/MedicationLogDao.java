@@ -21,11 +21,24 @@ public interface MedicationLogDao
     @Delete
     void deleteLogEntry(MedicationLogEntry logEntry);
 
-    @Query ("SELECT * FROM medication_log WHERE id = :id")
+    @Query("SELECT * FROM medication_log WHERE id = :id")
     LiveData<MedicationLogEntry> loadLogById(int id);
 
     @Query("DELETE FROM medication_log")
     void clearMedicationLogDatabase();
+
+    @Query("SELECT * FROM medication_log WHERE medicationName = :medicationName")
+    LiveData<List<MedicationLogEntry>> getEntriesByMedication(String medicationName);
+
+    @Query("SELECT * FROM medication_log WHERE date_taken = :dateTaken")
+    LiveData<List<MedicationLogEntry>> getEntriesByDate(String dateTaken);
+
+    @Query("SELECT DISTINCT medicationName FROM medication_log")
+    LiveData<List<String>> getEnteredMedicationNames();
+
+    @Query("SELECT DISTINCT date_taken FROM medication_log")
+    LiveData<List<String>> getUniqueLogDates();
+
 
 
 }

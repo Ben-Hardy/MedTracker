@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="@android:color/background_light"
+    android:background="@color/colorPrimary"
     android:orientation="vertical"
 >
 
@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/my_medications"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -27,6 +27,7 @@
         android:id="@+id/med_recyclerview"
         android:clipToPadding="false"
         android:layout_margin="16dp"
+        android:background="@android:color/white"
         />
 
     <Button
@@ -34,18 +35,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:background="@android:color/background_light"
         style="?android:attr/borderlessButtonStyle"
         android:text="@string/add_medication"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/medlist_go_home_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:background="@android:color/background_light"
         style="?android:attr/borderlessButtonStyle"
         android:text="@string/go_home"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@android:color/white" />
 </LinearLayout>

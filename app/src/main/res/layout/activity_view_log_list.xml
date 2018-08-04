@@ -2,14 +2,14 @@
 <LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@android:color/white"
+    android:background="@color/colorPrimary"
     xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/medication_entries"
-        android:textColor="@color/colorPrimary"
+        android:textColor="@android:color/white"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
@@ -21,17 +21,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/log_recyclerview"
-        android:layout_margin="16dp" />
+        android:background="@android:color/white"
+        android:paddingLeft="16dp"
+        android:layout_margin="16dp"
+        android:paddingStart="16dp" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/entrylist_filter_button"
+        android:layout_gravity="bottom|center"
+        android:layout_marginTop="8dp"
+        style="?android:attr/borderlessButtonStyle"
+        android:text="@string/filter"
+        android:textColor="@android:color/white"
+        />
     <Button
         android:id="@+id/entrylist_go_home_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
         style="?android:attr/borderlessButtonStyle"
-        android:background="@android:color/background_light"
         android:text="@string/go_home"
-        android:textColor="@color/colorPrimary" />
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

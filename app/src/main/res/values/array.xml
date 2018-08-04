@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="filter_prompt_choices">
+        <item>Medication Name</item>
+        <item>Date Taken</item>
+    </string-array>
+</resources>

@@ -52,4 +52,10 @@
     <string name="time_taken">Time taken: </string>
     <string name="additional_notes">Additional Notes: </string>
     <string name="daily_requirements">Daily Requirements:</string>
+    <string name="filter">Filter</string>
+    <string name="filter_prompt">What would you like to filter by?</string>
+    <string name="medication_name_filter">Medication Name</string>
+    <string name="date_taken_filter">Date Taken</string>
+
+
 </resources>
