@@ -194,7 +194,7 @@ public class ViewLogListActivity extends AppCompatActivity implements LogAdapter
             }
         };
     }
-    
+
     @Override
     public void onItemClickListener(int itemId) {
         Intent viewEntryIntent = new Intent(ViewLogListActivity.this, ViewLogEntryActivity.class);
