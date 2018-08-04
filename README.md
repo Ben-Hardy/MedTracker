@@ -1,4 +1,4 @@
-#MedTracker
+# MedTracker
 
 I wanted to learn how to make Android applications properly since I had only
 dabbled in them a bit but had fun when I did.
@@ -9,13 +9,13 @@ taking then adds entries every time they take the medications in real life.
 So far it just tracks medications and medication entries. Entries can be filtered
 by date or medication to help the user understand usage patterns.
 
-####Future features I'd like to add:
+#### Future features I'd like to add:
 
 - Reminders/Notifications to take medications
 - Statistics about medications being taken
 - A user interface that is more elaborate
 
-####How to run MedTracker
+#### How to run MedTracker
 
 To run MedTracker, one must have Android Studio installed. It does not use
 any external libraries or APIs so it should be simple to get working. From
