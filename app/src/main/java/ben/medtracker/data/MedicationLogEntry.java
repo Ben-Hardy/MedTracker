@@ -11,7 +11,7 @@ import java.util.Date;
 public class MedicationLogEntry {
 
     /*
-    The identifying key used my the database to find this log entry
+    The identifying key used by the database to find this log entry
      */
     @PrimaryKey(autoGenerate = true)
     private int id;

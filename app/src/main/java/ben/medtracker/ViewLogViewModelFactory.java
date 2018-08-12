@@ -6,6 +6,9 @@ import android.arch.lifecycle.ViewModelProviders;
 
 import ben.medtracker.data.MedicationLogDatabase;
 
+/*
+Creates an instance of a new ViewModel for a medication log entry
+ */
 public class ViewLogViewModelFactory  extends ViewModelProvider.NewInstanceFactory  {
     private final MedicationLogDatabase logDb;
     private final int logId;

@@ -25,11 +25,15 @@ public class AddLogEntryActivity extends AppCompatActivity {
 
     public static final String LOG = AddLogEntryActivity.class.getSimpleName();
     public static final String EXTRA_MED_NAME = "extramedname";
+
+    /*
+    The required date formatting information for formatting both the date and timestamps for
+    each entry
+     */
     private static final String DATE_FORMAT = "MM/dd/yyyy";
     private static final String TIME_FORMAT = "h:mm:ss";
     private final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
     private final SimpleDateFormat timeFormat = new SimpleDateFormat(TIME_FORMAT, Locale.getDefault());
-
 
     TextView medicationNameTextView;
     EditText doseAmountTextView;
@@ -53,6 +57,9 @@ public class AddLogEntryActivity extends AppCompatActivity {
         logDb = MedicationLogDatabase.getDatabase(this);
     }
 
+    /*
+    Initializes the UI and sets all necessary click listeners
+     */
     public void initializeUI() {
         medicationNameTextView = findViewById(R.id.add_entry_med_name_tv);
         doseAmountTextView = findViewById(R.id.add_entry_num_doses_et);
@@ -69,12 +76,16 @@ public class AddLogEntryActivity extends AppCompatActivity {
         goBackButton.setOnClickListener(onGoBackButtonClickedListener());
     }
 
-    int numEntries;
-
+    /*
+    Listener for adding a new entry. Makes sure that the amount taken is filled in.
+    It takes the current system time as a long and formats it into usable date and time
+    strings.
+     */
     public View.OnClickListener onAddEntryButtonClickedListener() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // make sure there is text for the amount taken
                 if (doseAmountTextView.getText().toString().isEmpty()) {
                     Toast.makeText(AddLogEntryActivity.this, R.string.add_entry_toast,
                             Toast.LENGTH_SHORT).show();
@@ -86,6 +97,8 @@ public class AddLogEntryActivity extends AppCompatActivity {
                     } else {
                         notes = notesTextView.getText().toString();
                     }
+
+                    // Convert current system time to a usable format.
                     Date dateTimeStamp = new Date();
                     String date = dateFormat.format(dateTimeStamp);
                     String time = timeFormat.format(dateTimeStamp);
@@ -95,6 +108,7 @@ public class AddLogEntryActivity extends AppCompatActivity {
                     final MedicationLogEntry entry = new MedicationLogEntry(medicationName,
                             dosage, date, time, notes);
 
+                    // add entry safelt to the database
                     AppExecutors.getInstance().diskIO().execute(new Runnable() {
                         @Override
                         public void run() {
@@ -115,6 +129,9 @@ public class AddLogEntryActivity extends AppCompatActivity {
         };
     }
 
+    /*
+    Listener that goes back to the log list activity when activated.
+     */
     public View.OnClickListener onGoBackButtonClickedListener() {
         return new View.OnClickListener() {
             @Override

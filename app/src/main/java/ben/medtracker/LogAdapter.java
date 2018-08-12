@@ -14,19 +14,31 @@ import java.util.Locale;
 
 import ben.medtracker.data.MedicationLogEntry;
 
+/*
+A RecyclerView adapter for viewing medication log entries. It populates the recyclerview
+with entry information like the medication name, the date and time taken, and the dosage amount
+ */
 public class LogAdapter extends RecyclerView.Adapter<LogAdapter.EntryViewHolder> {
 
+    /*
+    required formatting string and class for date formatting
+     */
     private static final String DATE_FORMAT = "dd/MM/yyy";
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
 
+    // our member variables
     private List<MedicationLogEntry> logEntries;
     private Context context;
     final private LogAdapter.ItemClickListener itemClickListener;
 
+    // interface so that onItemClickListener has to be implemented
     public interface ItemClickListener {
         void onItemClickListener(int itemId);
     }
 
+    /*
+    Constructor class
+     */
     public LogAdapter(Context context, ItemClickListener listener) {
         this.context = context;
         itemClickListener = listener;
@@ -40,6 +52,7 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.EntryViewHolder>
         return new EntryViewHolder(view);
     }
 
+    // Binds the log entry information to the viewHolder for the recyclerview entry
     @Override
     public void onBindViewHolder(@NonNull EntryViewHolder holder, int position) {
         MedicationLogEntry logEntry = logEntries.get(position);
@@ -61,11 +74,18 @@ public class LogAdapter extends RecyclerView.Adapter<LogAdapter.EntryViewHolder>
         return logEntries;
     }
 
+    /* use this to update log entries. Have to notify that data set has changed or recyclerview
+    will not update
+    */
     public void setLogEntries(List<MedicationLogEntry> logEntries) {
         this.logEntries = logEntries;
         notifyDataSetChanged();
     }
 
+    /*
+    EntryViewHolder class creates the actual view for showing the data. All fields are initialized
+    and the ViewHolder has a click listener added to it.
+     */
     public class EntryViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         TextView medNameTextView;

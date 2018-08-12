@@ -11,17 +11,19 @@ back end functionality:
     add whether or not a medication was taken on a given day (last column in database schema -NOT THAT) - TODO/PARTIAL
         - create new database for this rather than try and use one column since that's way to clunky - DONE
         - create add (DONE),
-                 view(TODO),
-                 delete(TODO)
+                 view(DONE),
+                 delete(DONE)
          for these log entries, or perhaps incorporate adding
           into existing views??????? - TODO
 Add notifications to remind to take medications - TODO
     - at time given by user?
-Swipe functionality on main screen for each medication - TODO
+Swipe functionality on main screen for each medication - DONE - On ViewMedicationListActivity
     - left == delete (with confirmation prompt?) - NOPE - moved to view medication activity.
-    - right == took medication (add to database) - TODO
-        - need undo for this or a prompt - TODO
+    - right == took medication (add to database) - DONE - used both swipe directions for this
+        - need undo for this or a prompt - DONE
 Make the app not look horrible - TODO
     - figure out how to make main page more useful - TODO
         - more info for each piece of recyclerview so less space is wasted - TODO
         - maybe a button for each medication for indicating whether it was taken or not
+
+Required Medication for a given day. Show what medications the user needs to take on a given day. - TODO

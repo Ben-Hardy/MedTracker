@@ -19,6 +19,10 @@ import java.util.List;
 import ben.medtracker.data.MedicationLogDatabase;
 import ben.medtracker.data.MedicationLogEntry;
 
+/*
+Activity for viewing the specific data for a log entry. Deletion of the entry is also
+possible from this class.
+ */
 public class ViewLogEntryActivity extends AppCompatActivity {
 
     private static final String TAG = ViewLogViewModel.class.getSimpleName();
@@ -36,6 +40,7 @@ public class ViewLogEntryActivity extends AppCompatActivity {
     MedicationLogDatabase logDb;
     int logId;
 
+    // This entry gets populated when the UI does. It saves having to do multiple database calls
     MedicationLogEntry logEntryToDelete;
 
     @Override
@@ -83,6 +88,10 @@ public class ViewLogEntryActivity extends AppCompatActivity {
         goBackButton.setOnClickListener(onBackButtonClickListener());
     }
 
+    /*
+        Listener for the Delete button. Verifies that the user wants the item deleted and then
+        deletes the item. Finally, sends the user back to the Activity displaying the log entries
+     */
     public View.OnClickListener onDeleteButtonClickListener() {
         return new View.OnClickListener() {
             @Override
@@ -115,6 +124,9 @@ public class ViewLogEntryActivity extends AppCompatActivity {
         };
     }
 
+    /*
+    Listener for the Back Button. When called, it goes back to the Entry Log List activity.
+     */
     public View.OnClickListener onBackButtonClickListener() {
         return new View.OnClickListener() {
             @Override

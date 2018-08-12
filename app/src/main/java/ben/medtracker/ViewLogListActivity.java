@@ -3,6 +3,7 @@ package ben.medtracker;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -44,6 +45,7 @@ public class ViewLogListActivity extends AppCompatActivity implements LogAdapter
 
         logDb = MedicationLogDatabase.getDatabase(getApplicationContext());
     }
+
     public void initializeUI() {
         RecyclerView recyclerView = findViewById(R.id.log_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -121,76 +123,84 @@ public class ViewLogListActivity extends AppCompatActivity implements LogAdapter
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(ViewLogListActivity.this);
                 builder.setTitle(R.string.filter_prompt)
-                        .setPositiveButton(R.string.medication_name_filter, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                final AlertDialog.Builder medBuilder = new AlertDialog.Builder(ViewLogListActivity.this);
-                                medBuilder.setItems(uniqueMedNames, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        String selected = uniqueMedNames[i];
-                                        LiveData<List<MedicationLogEntry>> entriesByMedName =
-                                                logDb.logDao().getEntriesByMedication(selected);
-
-                                        entriesByMedName.observe(ViewLogListActivity.this,
-                                                new Observer<List<MedicationLogEntry>>() {
-                                                    @Override
-                                                    public void onChanged(@Nullable List<MedicationLogEntry> medicationLogEntries) {
-                                                        logAdapter.setLogEntries(medicationLogEntries);
-                                                    }
-                                                });
-                                    }
-                                });
-                                medBuilder.setTitle("Select a Medication");
-                                medBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    }
-                                });
-                                medBuilder.create().show();
-                            }
-                        })
-                        .setNegativeButton(R.string.date_taken_filter, new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                final AlertDialog.Builder dateBuilder = new AlertDialog.Builder(ViewLogListActivity.this);
-                                dateBuilder.setItems(datesTaken, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        String selected = datesTaken[i];
-                                        LiveData<List<MedicationLogEntry>> entriesByMedName =
-                                                logDb.logDao().getEntriesByDate(selected);
-
-                                        entriesByMedName.observe(ViewLogListActivity.this,
-                                                new Observer<List<MedicationLogEntry>>() {
-                                                    @Override
-                                                    public void onChanged(@Nullable List<MedicationLogEntry> medicationLogEntries) {
-                                                        logAdapter.setLogEntries(medicationLogEntries);
-                                                    }
-                                                });
-                                    }
-                                });
-                                dateBuilder.setTitle("Select a Date");
-                                dateBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                                    }
-                                });
-                                dateBuilder.create().show();
-                            }
-                        })
+                        .setPositiveButton(R.string.medication_name_filter, onFilterMedButtonClickListener())
+                        .setNegativeButton(R.string.date_taken_filter, onFilterDateButtonClickListener())
                         .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-
+                                // Cancel just exits the dialog so don't do anything
                             }
                         });
 
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }
+        };
+    }
+
+    public DialogInterface.OnClickListener onFilterMedButtonClickListener() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final AlertDialog.Builder medBuilder = new AlertDialog.Builder(ViewLogListActivity.this);
+                medBuilder.setItems(uniqueMedNames, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String selected = uniqueMedNames[i];
+                        LiveData<List<MedicationLogEntry>> entriesByMedName =
+                                logDb.logDao().getEntriesByMedication(selected);
+
+                        entriesByMedName.observe(ViewLogListActivity.this,
+                                new Observer<List<MedicationLogEntry>>() {
+                                    @Override
+                                    public void onChanged(@Nullable List<MedicationLogEntry> medicationLogEntries) {
+                                        logAdapter.setLogEntries(medicationLogEntries);
+                                    }
+                                });
+                    }
+                });
+                medBuilder.setTitle("Select a Medication");
+                medBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                medBuilder.create().show();
+            }
+        };
+    }
+
+    public DialogInterface.OnClickListener onFilterDateButtonClickListener() {
+        return new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                final AlertDialog.Builder dateBuilder = new AlertDialog.Builder(ViewLogListActivity.this);
+                dateBuilder.setItems(datesTaken, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String selected = datesTaken[i];
+                        LiveData<List<MedicationLogEntry>> entriesByMedName =
+                                logDb.logDao().getEntriesByDate(selected);
+
+                        entriesByMedName.observe(ViewLogListActivity.this,
+                                new Observer<List<MedicationLogEntry>>() {
+                                    @Override
+                                    public void onChanged(@Nullable List<MedicationLogEntry> medicationLogEntries) {
+                                        logAdapter.setLogEntries(medicationLogEntries);
+                                    }
+                                });
+                    }
+                });
+                dateBuilder.setTitle("Select a Date");
+                dateBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                dateBuilder.create().show();
             }
         };
     }

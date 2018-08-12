@@ -27,6 +27,10 @@ public interface MedicationLogDao
     @Query("DELETE FROM medication_log")
     void clearMedicationLogDatabase();
 
+
+    /*
+    Queries for filtering in ViewLogListActivity
+     */
     @Query("SELECT * FROM medication_log WHERE medicationName = :medicationName")
     LiveData<List<MedicationLogEntry>> getEntriesByMedication(String medicationName);
 
