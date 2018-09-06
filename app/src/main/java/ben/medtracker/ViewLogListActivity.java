@@ -56,8 +56,6 @@ public class ViewLogListActivity extends AppCompatActivity implements LogAdapter
         DividerItemDecoration decoration = new DividerItemDecoration(getApplicationContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(decoration);
 
-
-
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         recyclerView.getLayoutParams().height = (Integer) (displayMetrics.heightPixels * 60)/100;

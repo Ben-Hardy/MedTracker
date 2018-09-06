@@ -56,6 +56,15 @@
     <string name="filter_prompt">What would you like to filter by?</string>
     <string name="medication_name_filter">Medication Name</string>
     <string name="date_taken_filter">Date Taken</string>
+    <string name="medtracker">MedTracker</string>
+    <string name="today_s_medication_summary">Today\'s Medication Summary</string>
+    <string name="summary_monday">Summary for Monday</string>
+    <string name="summary_tuesday">Summary for Tuesday</string>
+    <string name="summary_wednesday">Summary for Wednesday</string>
+    <string name="summary_thursday">Summary for Thursday</string>
+    <string name="summary_friday">Summary for Friday</string>
+    <string name="summary_saturday">Summary for Saturday</string>
+    <string name="summary_sunday">Summary for Sunday</string>
 
 
 </resources>

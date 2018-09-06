@@ -8,6 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
+    Button todaysSummaryButton;
     Button viewMyMedicationsButton;
     Button viewMyEntriesButton;
 
@@ -20,10 +21,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initializeUI() {
+        todaysSummaryButton = findViewById(R.id.today_button);
+        todaysSummaryButton.setOnClickListener(onSummaryButtonClickListener());
         viewMyMedicationsButton = findViewById(R.id.view_medications_button);
         viewMyMedicationsButton.setOnClickListener(onMyMedicationsButtonClickListener());
         viewMyEntriesButton = findViewById(R.id.view_entries_button);
         viewMyEntriesButton.setOnClickListener(onMyEntriesButtonClickListener());
+    }
+
+    public View.OnClickListener onSummaryButtonClickListener() {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent summaryIntent = new Intent(MainActivity.this, TodaysSummary.class);
+                startActivity(summaryIntent);
+            }
+        };
     }
 
     public View.OnClickListener onMyMedicationsButtonClickListener() {

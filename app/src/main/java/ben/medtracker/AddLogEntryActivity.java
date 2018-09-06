@@ -108,7 +108,7 @@ public class AddLogEntryActivity extends AppCompatActivity {
                     final MedicationLogEntry entry = new MedicationLogEntry(medicationName,
                             dosage, date, time, notes);
 
-                    // add entry safelt to the database
+                    // add entry safely to the database
                     AppExecutors.getInstance().diskIO().execute(new Runnable() {
                         @Override
                         public void run() {
