@@ -9,6 +9,8 @@ taking then adds entries every time they take the medications in real life.
 So far it just tracks medications and medication entries. Entries can be filtered
 by date or medication to help the user understand usage patterns.
 
+If you wish to see the actual XML and Java code, it can be found in the directory `./app/src/main/java/ben/medtracker`. Gotta love Java project directory structures.
+
 #### Future features I'd like to add:
 
 - Reminders/Notifications to take medications
