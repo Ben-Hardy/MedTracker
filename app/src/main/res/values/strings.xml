@@ -33,7 +33,7 @@
     <string name="go_home">Go Home</string>
     <string name="daily">Daily</string>
     <string name="add_log_entry">Add Log Entry</string>
-    <string name="how_much_of_this_medication_did_you_take">How much of this medication did you take? (eg: 2 pills, 400mg)</string>
+    <string name="how_much_of_this_medication_did_you_take">How many doses of this medication did you take?</string>
     <string name="any_note_or_observations">Any note or observations? (Optional)</string>
     <string name="add_entry">Add Entry</string>
     <string name="add_entry_toast">Please enter how much you took!</string>
@@ -65,6 +65,9 @@
     <string name="summary_friday">Summary for Friday</string>
     <string name="summary_saturday">Summary for Saturday</string>
     <string name="summary_sunday">Summary for Sunday</string>
+    <string name="required_medication">Required Medication:</string>
+    <string name="medication_taken">Medication Taken:</string>
+    <string name="nothing_taken">Nothing taken yet today!</string>
 
 
 </resources>

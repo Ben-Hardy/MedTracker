@@ -30,6 +30,8 @@ public class TodaysSummary extends AppCompatActivity {
     Button goHomeButton;
     TextView titleTextView;
     TextView dateTextView;
+    TextView requiredMedicationTextView;
+    TextView medicationTakenTextView;
 
     private static final String DATE_FORMAT = "MM/dd/yyyy";
     private final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
@@ -105,7 +107,8 @@ public class TodaysSummary extends AppCompatActivity {
         LiveData<List<MedicationEntry>> medicationLiveData = medDb.medicationDao().loadAllMedications();
 
         final ArrayList<MedicationTally> requiredMedicationTally = new ArrayList<>();
-        final ArrayList<MedicationTally> asNeededMedicationTally = new ArrayList<>();
+        final ArrayList<MedicationTally> medicationTakenTally = new ArrayList<>();
+
 
 
 
@@ -117,18 +120,20 @@ public class TodaysSummary extends AppCompatActivity {
                 for (MedicationEntry entry: medicationEntries) {
                     // skip if the medication is as needed
                     if (entry.getWeeklyFrequency().equals(getString(R.string.as_needed))) {
-                        asNeededMedicationTally.add(new MedicationTally(entry.getMedicationName(), 0));
+
                     } else if (entry.getWeeklyFrequency().equals(getString(R.string.daily))) {
                         requiredMedicationTally.add(new MedicationTally(entry.getMedicationName(),
                                 Integer.parseInt(entry.getDailyFrequency())));
                         Log.d(TAG, String.format("Medication Name: %s Number Times Required: %s", entry.getMedicationName(),
                                 entry.getDailyFrequency()));
+                        requiredMedicationTextView.setText(String.format("%s%s x %s\n", String.valueOf(requiredMedicationTextView.getText()), entry.getMedicationName(), entry.getDailyFrequency()));
                     } else {
                         if (entry.getWeeklyFrequency().contains(dayOfTheWeek)) {
                             requiredMedicationTally.add(new MedicationTally(entry.getMedicationName(),
                                     Integer.parseInt(entry.getDailyFrequency())));
                             Log.d(TAG, String.format("Medication Name: %s Number Times Required: %s", entry.getMedicationName(),
                                     entry.getDailyFrequency()));
+                            requiredMedicationTextView.setText(String.format("%s%s x %s\n", String.valueOf(requiredMedicationTextView.getText()), entry.getMedicationName(), entry.getDailyFrequency()));
                         }
                     }
                 }
@@ -139,10 +144,25 @@ public class TodaysSummary extends AppCompatActivity {
                 logLiveData.observe(TodaysSummary.this, new Observer<List<MedicationLogEntry>>() {
                     @Override
                     public void onChanged(@Nullable List<MedicationLogEntry> medicationLogEntries) {
-                        if (medicationLogEntries != null) {
+                        if (medicationLogEntries != null && !medicationLogEntries.isEmpty()) {
                             for (MedicationLogEntry entry: medicationLogEntries) {
-
+                                boolean found = false;
+                                for (MedicationTally tally: medicationTakenTally) {
+                                    if (tally.getMedicationName().equals(entry.getMedicationName())) {
+                                        tally.incrementNumberTaken();
+                                        found = true;
+                                        break;
+                                    }
+                                }
+                                if (!found) {
+                                    medicationTakenTally.add(new MedicationTally(entry.getMedicationName(), 0, 1));
+                                }
                             }
+                            for (MedicationTally tally: medicationTakenTally) {
+                                medicationTakenTextView.setText(String.format("%s%s x %s\n", String.valueOf(medicationTakenTextView.getText()), tally.getMedicationName(), tally.getNumberTaken()));
+                            }
+                        } else {
+                            medicationTakenTextView.setText(R.string.nothing_taken);
                         }
 
                     }
@@ -164,6 +184,8 @@ public class TodaysSummary extends AppCompatActivity {
     private void initializeUI() {
         titleTextView = findViewById(R.id.summary_title_textview);
         dateTextView = findViewById(R.id.summary_date);
+        requiredMedicationTextView = findViewById(R.id.summary_required_medication_tv);
+        medicationTakenTextView = findViewById(R.id.summary_medication_taken_list_tv);
 
         goHomeButton = findViewById(R.id.summary_home_button);
         goHomeButton.setOnClickListener(onHomeButtonClickListener());
@@ -190,6 +212,12 @@ public class TodaysSummary extends AppCompatActivity {
             this.medicationName = medicationName;
             this.numberRequired = numberRequired;
             numberTaken = 0;
+        }
+
+        public MedicationTally(String medicationName, int numberRequired, int numberTaken) {
+            this.medicationName = medicationName;
+            this.numberRequired = numberRequired;
+            this.numberTaken = numberTaken;
         }
 
         public String getMedicationName() { return medicationName;}

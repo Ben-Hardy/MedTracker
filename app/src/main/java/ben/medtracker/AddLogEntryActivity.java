@@ -90,40 +90,50 @@ public class AddLogEntryActivity extends AppCompatActivity {
                     Toast.makeText(AddLogEntryActivity.this, R.string.add_entry_toast,
                             Toast.LENGTH_SHORT).show();
                 } else {
-                    String dosage = doseAmountTextView.getText().toString();
-                    String notes;
-                    if (notesTextView.getText().toString().isEmpty()) {
-                        notes = "No notes added for this entry.";
+                    int dosesTaken = -1;
+
+                    try {
+                        dosesTaken = Integer.parseInt(doseAmountTextView.getText().toString());
+                    } catch (Exception e) {}
+
+                    if (dosesTaken < 0) {
+                        Toast.makeText(AddLogEntryActivity.this, "Please enter a number for doses taken!", Toast.LENGTH_SHORT).show();
                     } else {
-                        notes = notesTextView.getText().toString();
+                        String notes;
+                        if (notesTextView.getText().toString().isEmpty()) {
+                            notes = "No notes added for this entry.";
+                        } else {
+                            notes = notesTextView.getText().toString();
+                        }
+
+                        // Convert current system time to a usable format.
+                        Date dateTimeStamp = new Date();
+                        String date = dateFormat.format(dateTimeStamp);
+                        String time = timeFormat.format(dateTimeStamp);
+
+                        Log.d(LOG, "Entry: name: " + medicationNameTextView.getText().toString()
+                                + " dosage: " + dosesTaken + " notes: " + notes + " date: " + date);
+                        final MedicationLogEntry entry = new MedicationLogEntry(medicationName,
+                                String.format("%d", dosesTaken), date, time, notes);
+
+                        // add entry safely to the database
+                        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                logDb.logDao().insertLogEntry(entry);
+                            }
+                        });
+                        logDb.logDao().loadMedicationEntries().observe(AddLogEntryActivity.this, new Observer<List<MedicationLogEntry>>() {
+                            @Override
+                            public void onChanged(@Nullable List<MedicationLogEntry> medicationLogEntries) {
+                                Log.d(LOG, "Number of log entries: " + medicationLogEntries.size());
+                            }
+                        });
+
+                        Log.d(LOG, "Added new log entry");
+                        onBackPressed();
                     }
 
-                    // Convert current system time to a usable format.
-                    Date dateTimeStamp = new Date();
-                    String date = dateFormat.format(dateTimeStamp);
-                    String time = timeFormat.format(dateTimeStamp);
-
-                    Log.d(LOG, "Entry: name: " + medicationNameTextView.getText().toString()
-                    + " dosage: " + dosage + " notes: " + notes + " date: " + date);
-                    final MedicationLogEntry entry = new MedicationLogEntry(medicationName,
-                            dosage, date, time, notes);
-
-                    // add entry safely to the database
-                    AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            logDb.logDao().insertLogEntry(entry);
-                        }
-                    });
-                    logDb.logDao().loadMedicationEntries().observe(AddLogEntryActivity.this, new Observer<List<MedicationLogEntry>>() {
-                        @Override
-                        public void onChanged(@Nullable List<MedicationLogEntry> medicationLogEntries) {
-                            Log.d(LOG, "Number of log entries: " + medicationLogEntries.size());
-                        }
-                    });
-
-                    Log.d(LOG, "Added new log entry");
-                    onBackPressed();
                 }
             }
         };

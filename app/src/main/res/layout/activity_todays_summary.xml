@@ -42,4 +42,48 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/summary_title_textview"
         tools:text="Date" />
+
+    <TextView
+        android:id="@+id/summary_required_medication_label_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/required_medication"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/summary_date" />
+
+    <TextView
+        android:id="@+id/summary_required_medication_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/summary_required_medication_label_tv"
+        app:layout_constraintTop_toBottomOf="@+id/summary_required_medication_label_tv"
+        tools:text="Required Medication List" />
+
+    <TextView
+        android:id="@+id/summary_medication_taken_label_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/medication_taken"
+        android:textColor="@color/colorPrimary"
+        app:layout_constraintStart_toStartOf="@+id/summary_required_medication_label_tv"
+        app:layout_constraintTop_toBottomOf="@+id/summary_required_medication_tv" />
+
+    <TextView
+        android:id="@+id/summary_medication_taken_list_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="@+id/summary_medication_taken_label_tv"
+        app:layout_constraintTop_toBottomOf="@+id/summary_medication_taken_label_tv"
+        tools:text="Medication Taken List" />
 </android.support.constraint.ConstraintLayout>
