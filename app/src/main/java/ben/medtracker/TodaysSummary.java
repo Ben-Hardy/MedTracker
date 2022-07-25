@@ -116,7 +116,6 @@ public class TodaysSummary extends AppCompatActivity {
             @Override
             public void onChanged(@Nullable List<MedicationEntry> medicationEntries) {
                 Log.d(TAG, "Number of medications: " + medicationEntries.size());
-
                 for (MedicationEntry entry: medicationEntries) {
                     // skip if the medication is as needed
                     if (entry.getWeeklyFrequency().equals(getString(R.string.as_needed))) {
@@ -140,7 +139,6 @@ public class TodaysSummary extends AppCompatActivity {
 
                 LiveData<List<MedicationLogEntry>> logLiveData = logDb.logDao().getEntriesByDate(date);
 
-                assert logLiveData == null;
                 logLiveData.observe(TodaysSummary.this, new Observer<List<MedicationLogEntry>>() {
                     @Override
                     public void onChanged(@Nullable List<MedicationLogEntry> medicationLogEntries) {
@@ -192,12 +190,9 @@ public class TodaysSummary extends AppCompatActivity {
     }
 
     private View.OnClickListener onHomeButtonClickListener() {
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goBackIntent = new Intent(TodaysSummary.this, MainActivity.class);
-                startActivity(goBackIntent);
-            }
+        return view -> {
+            Intent goBackIntent = new Intent(TodaysSummary.this, MainActivity.class);
+            startActivity(goBackIntent);
         };
     }
 
